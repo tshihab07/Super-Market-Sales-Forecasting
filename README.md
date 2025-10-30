@@ -37,6 +37,8 @@ The dataset contains the features as follows:
 - Univariate Analysis
 - Bivariate Analysis
 - Multivariate Analysis
+- Feature Engineering
+- Categorical Encoding
 
 ---
 
