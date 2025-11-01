@@ -1,5 +1,18 @@
 # Super Market Sales Forecasting
 
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Data Flow](#data-flow)
+    - [Dataset Description](#dataset-description)
+    - [Data Preprocessing](#data-preprocessing)
+    - [Libraries Description](#libraries-description)
+
+---
+
+## Overview
+
 Super Market Sales Forecasting is a data-driven project designed to predict future sales performance using historical sales data, seasonal trends, and customer purchasing patterns. By leveraging machine learning and statistical analysis, the system helps businesses anticipate demand, optimize inventory, plan promotions, and make informed decisions to boost profitability and operational efficiency.
 
 ---
@@ -54,6 +67,15 @@ The dataset contains the features as follows:
 - **Categorical Encoding**
     - Target encoder to avoid high dimensionality of categorical features
     - One-hot-encoding for low cardinality categories
+
+
+### Libraries Description
+| Library | Purpose |
+|---------|---------|
+| `pandas`, `numpy` | Data manipulation and analysis |
+| `scikit-learn` | Model training, evaluation, and preprocessing |
+| `lightgbm`, `xgboost` | Gradient boosting models |
+| `joblib` | Model persistence |
 
 ---
 
