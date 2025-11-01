@@ -34,11 +34,26 @@ The dataset contains the features as follows:
 
 
 ### Data Preprocessing
-- Univariate Analysis
-- Bivariate Analysis
-- Multivariate Analysis
-- Feature Engineering
-- Categorical Encoding
+- **Sanity Check**
+  - Remove duplicates
+  - check nulls status
+  - standardize features
+
+- **Exploratory Data Analysis**
+  - ***Univariate Analysis***: `countplot`, `histplot`, `boxplot` are used to check data distribution and outliers detection.
+  - ***Bivariate Analysis***: `scatterplot` for numerical relationship, `boxplot` for categorical features vs target features.
+  - ***Multivariate Analysis***: `pairplot` for quick overview of numerical relationship, `scatterplot` for feature influences the relationship, grouped bar chart for approval rate combination, `faceted Plot` for multi-dimensional relationships, `heatmap` of correlation matrix.
+
+- **Missing Value Handling**
+  - Impute missing values with median by using groupby technique 
+
+- **Feature Engineering**
+  - Standardize features names
+  - Create new calculative feature
+
+- **Categorical Encoding**
+    - Target encoder to avoid high dimensionality of categorical features
+    - One-hot-encoding for low cardinality categories
 
 ---
 
