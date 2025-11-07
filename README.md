@@ -8,6 +8,7 @@
     - [Dataset Description](#dataset-description)
     - [Data Preprocessing](#data-preprocessing)
     - [Libraries Description](#libraries-description)
+- [Modeling Pipelne](#modeling-pipeline)
 
 ---
 
@@ -78,6 +79,46 @@ The dataset contains the features as follows:
 | `joblib` | Model persistence |
 
 ---
+
+## Modeling Pipelne
+
+**Model Selection Criteria:**
+
+Five ensemble-based regression algorithms were selected due to their strong performance in structured/tabular data and ability to model nonlinear relationships and feature interactions.
+
+The overall modeling workflow involved the following stages:
+
+1. Data Splitting
+
+  - The preprocessed dataset was split into training (80%) and testing (20%) subsets.
+  - A time-based split was used to maintain the chronological order of sales data and prevent data leakage.
+
+2. Baseline Model Development
+
+  - Initial models were trained using default hyperparameters to establish a baseline performance score (using metrics such as RMSE and R²).
+
+3. Model Optimization and Hyperparameter Tuning
+
+  - Each model was optimized using two complementary techniques (e.g., Grid Search, Random Search, Bayesian Optimization, or Optuna).
+  - Cross-validation (typically 5-fold) was applied to ensure generalization.
+  - The best parameter sets were selected based on validation RMSE.
+
+4. Model Evaluation
+
+  - Final models were evaluated on the test set using RMSE, MAE, and R².
+  - Feature importance and SHAP analysis were later applied to interpret model behavior.
+
+
+**Model Development & Hyperparameter Optimization**
+
+| **Model**                       | **Optimization Techniques**                                         | **Key Hyperparameters Tuned**                                                                                                |
+| ------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Random Forest Regressor**     | 1. Grid Search CV  <br> 2. Randomized Search CV                     | `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`, `bootstrap`                            |
+| **XGBoost Regressor**           | 1. Bayesian Optimization (via Hyperopt) <br> 2. Optuna Optimization | `n_estimators`, `learning_rate`, `max_depth`, `subsample`, `colsample_bytree`, `reg_alpha`, `reg_lambda`                     |
+| **LightGBM Regressor**          | 1. Optuna Optimization <br> 2. Randomized Search CV                 | `num_leaves`, `max_depth`, `learning_rate`, `n_estimators`, `feature_fraction`, `bagging_fraction`, `lambda_l1`, `lambda_l2` |
+| **Gradient Boosting Regressor** | 1. Grid Search CV <br> 2. Randomized Search CV                      | `n_estimators`, `learning_rate`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `subsample`                           |
+| **CatBoost Regressor**          | 1. Bayesian Optimization <br> 2. Optuna Optimization                | `iterations`, `depth`, `learning_rate`, `l2_leaf_reg`, `bagging_temperature`, `border_count`                                 |
+
 
 **Author**<br>
 Md. Tushar Shihab<br>
