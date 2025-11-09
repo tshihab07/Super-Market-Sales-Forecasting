@@ -43,10 +43,10 @@ class Evaluator:
     
 
     @staticmethod
-    def create_performance_table(train_metrics, test_metrics, model_name="Model"):
-        """Return DataFrame: Metrics | Training | Test (as requested)."""
+    def create_performance_table(train_metrics, test_metrics):
+        """Return DataFrame: Metrics | Training | Test """
         perf_df = pd.DataFrame({
-            'Metrics': ['MSE', 'MAE', 'RMSE', 'R2_Score', 'MAPE'],
+            'Metrics': ['MSE', 'MAE', 'RMSE', 'R2 Score', 'MAPE'],
             'Training': train_metrics,
             'Test': test_metrics
         }).round(4)
