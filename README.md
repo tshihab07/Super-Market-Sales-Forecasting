@@ -119,7 +119,8 @@ The overall modeling workflow involved the following stages:
 | **Gradient Boosting Regressor** | 1. Grid Search CV <br> 2. Randomized Search CV                      | `n_estimators`, `learning_rate`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `subsample`                           |
 | **CatBoost Regressor**          | 1. Bayesian Optimization <br> 2. Optuna Optimization                | `iterations`, `depth`, `learning_rate`, `l2_leaf_reg`, `bagging_temperature`, `border_count`                                 |
 
+---
 
 **Author**<br>
-Md. Tushar Shihab<br>
+Tushar Shihab<br>
 Machine Learning Engineer
