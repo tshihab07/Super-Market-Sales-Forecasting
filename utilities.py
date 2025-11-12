@@ -24,6 +24,7 @@ class Evaluator:
         y_true = np.array(y_true)
         y_pred = np.array(y_pred)
         y_true_safe = np.where(np.abs(y_true) < epsilon, epsilon, y_true)
+        
         return np.mean(np.abs((y_true - y_pred) / y_true_safe)) * 100
 
 
@@ -43,14 +44,35 @@ class Evaluator:
     
 
     @staticmethod
-    def create_performance_table(train_metrics, test_metrics):
+    def performance_table(train_metrics, test_metrics):
         """Return DataFrame: Metrics | Training | Test """
         perf_df = pd.DataFrame({
             'Metrics': ['MSE', 'MAE', 'RMSE', 'R2 Score', 'MAPE'],
             'Training': train_metrics,
             'Test': test_metrics
         }).round(4)
+
         return perf_df
+    
+
+    @staticmethod
+    def summary_builder(cv_df, model_ids, test_metrics):
+        """ Overall Model Performance (CV + Test) — Merged """
+        test_df = pd.DataFrame({
+            "Model": model_ids,
+            "Test MSE": [m[0] for m in test_metrics],
+            "Test MAE": [m[1] for m in test_metrics],
+            "Test RMSE": [m[2] for m in test_metrics],
+            "Test R2": [m[3] for m in test_metrics],
+            "Test MAPE": [m[4] for m in test_metrics]
+        })
+
+        merged = pd.merge(cv_df, test_df, on="Model", how="inner")
+        return merged[[
+            "Model",
+            "CV MSE", "CV MAE", "CV RMSE", "CV R2", "CV MAPE",
+            "Test MSE", "Test MAE", "Test RMSE", "Test R2", "Test MAPE"
+        ]].round(4)
 
 
     @staticmethod
@@ -93,7 +115,8 @@ class Evaluator:
             'CV R2': cv_r2,
             'CV MAPE': cv_mape
         }
-    
+
+
     @staticmethod
     def assess_overfitting(cv_r2, test_r2, cv_rmse, test_rmse, tolerance=0.05):
         """Determine overfitting status and generalization quality."""
@@ -130,50 +153,63 @@ class Evaluator:
 # CLASS: ModelPersister
 # Handles saving models, performance summaries, and aggregated comparisons
 # ------------------------------------------------------------------
+# Handles saving trained models and performance results to organized directories
 class ModelPersister:
     
     def __init__(self, model_name, artifacts_root="../artifacts"):
         self.model_name = model_name
-        self.root = Path(artifacts_root)
-        self.model_dir = self.root / "models"
-        self.perf_dir = self.root / "model-performance"
+        self.artifacts_root = Path(artifacts_root)
+        self.model_dir = self.artifacts_root / "models"
+        self.performance_dir = self.artifacts_root / "model-performance"
         
+        # Create directories
         self.model_dir.mkdir(parents=True, exist_ok=True)
-        self.perf_dir.mkdir(parents=True, exist_ok=True)
+        self.performance_dir.mkdir(parents=True, exist_ok=True)
     
+
+    # Save the trained model in appropriate format
+    def save_model(self, model):
+        joblib.dump(model, self.model_dir / f"model_{self.model_name.title()}.pkl")
+        
+        print(f"Model saved: {self.model_dir}/{self.model_name.lower()}.pkl")
+
+    # Save full train/test/CV metrics for this model only
+    def save_performance(self, performance_df):
+        filename = f"{self.model_name.lower()}Performance.csv"
+        path = self.performance_dir / filename
+        performance_df.to_csv(path, index=False)
+        print(f"{self.model_name} performance saved: {path}")
     
-    def save_model(self, model, model_type="sklearn"):
-        """Save model. Supports sklearn (joblib) and Keras (if needed later)."""
-        if model_type.lower() in ["keras", "tf", "tensorflow"]:
-            model_path = self.model_dir / f"{self.model_name.lower()}_model.keras"
-            model.save(model_path)
+
+    # Append this model's summary metrics to the shared performance file
+    def aggregated_performance(self, df):
+        path = self.performance_dir / "a_ModelPerformance.csv"
+        
+        # Append or create
+        if path.exists():
+            model_perf = pd.read_csv(path)                          # open previous loaded data
+            df = pd.concat([model_perf, df], ignore_index=True)     # append new data
+            df.to_csv(path, index=False)
         
         else:
-            model_path = self.model_dir / f"{self.model_name.lower()}_model.pkl"
-            joblib.dump(model, model_path)
-        print(f"✅ Model saved: {model_path}")
+            df.to_csv(path, index=False)
+        
+        print(f"Appended to aggregated performance: {path}")
     
-    
-    def save_performance_csv(self, perf_df, suffix="performance"):
-        """Save individual model performance (train/test)."""
-        path = self.perf_dir / f"{self.model_name.lower()}_{suffix}.csv"
-        perf_df.to_csv(path, index=False)
-        print(f"✅ Performance saved: {path}")
-    
-    
-    def append_to_aggregated(self, df, filename="a_ModelPerformance.csv"):
-        """Append this model's row to shared performance CSV (for multi-model comparison)."""
-        path = self.perf_dir / filename
+
+    # Append this model's overfitting metrics to the shared overfitting file
+    def append_overfitting(self, df):
+        path = self.performance_dir / "a_overfittingAnalysis.csv"
+        
         if path.exists():
-            existing = pd.read_csv(path)
-            df = pd.concat([existing, df], ignore_index=True)
-        df.to_csv(path, index=False)
-        print(f"✅ Appended to aggregated file: {path}")
-    
-    
-    def append_overfitting_row(self, df):
-        """Append overfitting analysis row (extensible for future models)."""
-        self.append_to_aggregated(df, filename="a_OverfittingAnalysis.csv")
+            overfit_df = pd.read_csv(path)                          # open previous loaded data
+            df = pd.concat([overfit_df, df], ignore_index=True)     # append new data
+            df.to_csv(path, index=False)
+        
+        else:
+            df.to_csv(path, index=False)
+        
+        print(f"Appended to overfitting analysis: {path}")
 
 
 # ------------------------------------------------------------------
