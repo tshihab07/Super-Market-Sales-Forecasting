@@ -56,10 +56,10 @@ class Evaluator:
     
 
     @staticmethod
-    def summary_builder(cv_df, model_ids, test_metrics):
+    def summary_builder(model_names, cv_df, test_metrics):
         """ Overall Model Performance (CV + Test) — Merged """
         test_df = pd.DataFrame({
-            "Model": model_ids,
+            "Model": model_names,
             "Test MSE": [m[0] for m in test_metrics],
             "Test MAE": [m[1] for m in test_metrics],
             "Test RMSE": [m[2] for m in test_metrics],
@@ -125,10 +125,10 @@ class Evaluator:
         
         # Overfitting logic
         if r2_gap > tolerance or rmse_ratio > 1.05:
-            overfit_status = "Yes"
+            overfit_status = "High"
         
         elif abs(r2_gap) <= tolerance and 0.95 <= rmse_ratio <= 1.05:
-            overfit_status = "No"
+            overfit_status = "Low"
         
         else:
             overfit_status = "Mild"
@@ -146,7 +146,7 @@ class Evaluator:
         else:
             gen_status = "Poor"
         
-        return overfit_status, gen_status
+        return r2_gap, rmse_ratio, overfit_status, gen_status
 
 
 # ------------------------------------------------------------------
