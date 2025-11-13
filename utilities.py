@@ -174,8 +174,8 @@ class ModelPersister:
         print(f"Model saved: {self.model_dir}/{self.model_name.lower()}.pkl")
 
     # Save full train/test/CV metrics for this model only
-    def save_performance(self, performance_df):
-        filename = f"{self.model_name.lower()}Performance.csv"
+    def save_performance(self, performance_df, tag=""):
+        filename = f"{self.model_name.lower()}{tag}Performance.csv"
         path = self.performance_dir / filename
         performance_df.to_csv(path, index=False)
         print(f"{self.model_name} performance saved: {path}")
