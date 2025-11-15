@@ -113,11 +113,36 @@ The overall modeling workflow involved the following stages:
 
 | **Model**                       | **Optimization Techniques**                                         | **Key Hyperparameters Tuned**                                                                                                |
 | ------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Random Forest Regressor**     | 1. Grid Search CV  <br> 2. Randomized Search CV                     | `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`, `bootstrap`                            |
+| **Random Forest Regressor**     | 1. Optuna Optimization  <br> 2. HalvingRandomSearchCV                     | `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`, `bootstrap`                            |
 | **XGBoost Regressor**           | 1. RandomizedSearch <br> 2. Optuna Optimization | `n_estimators`, `learning_rate`, `max_depth`, `subsample`, `colsample_bytree`, `reg_alpha`, `reg_lambda`                     |
 | **LightGBM Regressor**          | 1. Optuna Optimization <br> 2. Randomized Search CV                 | `num_leaves`, `max_depth`, `learning_rate`, `n_estimators`, `feature_fraction`, `bagging_fraction`, `lambda_l1`, `lambda_l2` |
 | **Gradient Boosting Regressor** | 1. Grid Search CV <br> 2. Randomized Search CV                      | `n_estimators`, `learning_rate`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `subsample`                           |
 | **CatBoost Regressor**          | 1. Bayesian Optimization <br> 2. Optuna Optimization                | `iterations`, `depth`, `learning_rate`, `l2_leaf_reg`, `bagging_temperature`, `border_count`                                 |
+
+**Model Development Workflow**
+
+```mermaid
+graph LR
+    A[XGBoost: Baseline, Optuna, RandomSearch] --> A1[Pick best variant]
+    B[LightGBM: Baseline, Optuna, RandomSearch] --> B1[Pick best variant]
+    C[RandomForest: Baseline, Optuna, HalvingRandomSearch] --> C1[Pick best variant]
+    D[GradientBoosting: Baseline, Optuna, RandomSearch] --> D1[Pick best variant]
+    E[CatBoost: Baseline, Optuna, BayesianSearch] --> E1[Pick best variant]
+    
+    A1 --> F[Compare 5 best variants]
+    B1 --> F
+    C1 --> F
+    D1 --> F
+    E1 --> F
+    
+    F --> G{Select final model}
+    G --> H[✅ SHAP]
+    G --> I[✅ Residual Diagnostics]
+    G --> J[✅ Prediction Intervals]
+    H --> K[Deploy]
+    I --> K
+    J --> K
+```
 
 ---
 
