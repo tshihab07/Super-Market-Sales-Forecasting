@@ -5,3 +5,6 @@ XGBoost (RandomSearchCV),0.5225,0.7342,0.5183,0.7455,-0.0113,0.992,Low,Good
 RandomForest (Baseline),0.5458,0.7099,0.5401,0.7236,-0.0137,0.9896,Low,Good
 RandomForest (Optuna),0.5512,0.7041,0.5422,0.7214,-0.0173,0.9837,Low,Good
 RandomForest (HalvingRandomSearchCV),0.5255,0.731,0.5228,0.741,-0.01,0.9949,Low,Good
+LightGBM (Baseline),0.533,0.7233,0.5253,0.7386,-0.0153,0.9856,Low,Good
+LightGBM (Optuna),0.6475,0.5918,0.6482,0.6019,-0.0101,1.0011,Low,Fair
+LightGBM (RandomSearchCV),0.5235,0.7331,0.518,0.7458,-0.0127,0.9895,Low,Good
