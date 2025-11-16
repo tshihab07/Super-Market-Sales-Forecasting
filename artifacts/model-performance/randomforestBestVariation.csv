@@ -1,0 +1,16 @@
+Metrics,Value
+Model,RandomForest (HalvingRandomSearchCV)
+CV MSE,0.2762
+CV MAE,0.4058
+CV RMSE,0.5255
+CV R2,0.731
+CV MAPE,5.8882
+Test MSE,0.2733
+Test MAE,0.4033
+Test RMSE,0.5228
+Test R2,0.741
+Test MAPE,5.9436
+R2 Gap,-0.01
+RMSE Ratio,0.9949
+Overfitting Status,Low
+Model Status (Generalization),Good
