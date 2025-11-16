@@ -1,0 +1,16 @@
+Metrics,Value
+Model,LightGBM (RandomSearchCV)
+CV MSE,0.2741
+CV MAE,0.4043
+CV RMSE,0.5235
+CV R2,0.7331
+CV MAPE,5.8671
+Test MSE,0.2683
+Test MAE,0.4
+Test RMSE,0.518
+Test R2,0.7458
+Test MAPE,5.8899
+R2 Gap,-0.0127
+RMSE Ratio,0.9895
+Overfitting Status,Low
+Model Status (Generalization),Good
