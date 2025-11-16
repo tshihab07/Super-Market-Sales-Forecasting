@@ -1,0 +1,16 @@
+Metrics,Value
+Model,XGBoost (RandomSearchCV)
+CV MSE,0.273
+CV MAE,0.4038
+CV RMSE,0.5225
+CV R2,0.7342
+CV MAPE,5.87
+Test MSE,0.2686
+Test MAE,0.4011
+Test RMSE,0.5183
+Test R2,0.7455
+Test MAPE,5.9102
+R2 Gap,-0.0113
+RMSE Ratio,0.992
+Overfitting Status,Low
+Model Status (Generalization),Good
