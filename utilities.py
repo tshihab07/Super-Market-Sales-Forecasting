@@ -252,3 +252,42 @@ class DataHandler:
                 artifacts['cv'] = KFold(n_splits=5, shuffle=True, random_state=42)
         
         return artifacts
+    
+
+    @staticmethod
+    def prepare_for_catboost(x_train, x_test):
+        """Convert data to CatBoost-safe format (int/str categoricals)."""
+        x_train_cb = x_train.copy()
+        x_test_cb = x_test.copy()
+        cat_features = []
+        
+        for col in x_train.columns:
+            col_train = x_train[col]
+            col_test = x_test[col]
+            
+            # case 1: Object (strings) to categorical
+            if col_train.dtype == 'object':
+                cat_features.append(col)
+
+                # ensure test set has same categories
+                x_train_cb[col] = col_train.astype('category')
+                x_test_cb[col] = col_test.astype('category')
+            
+            # case 2: integer + low cardinality to categorical
+            elif np.issubdtype(col_train.dtype, np.integer) and col_train.nunique() < 50:
+                cat_features.append(col)
+            
+            # case 3: float to check if it's actually integer-encoded
+            elif np.issubdtype(col_train.dtype, np.floating):
+                
+                # check if all values are whole numbers
+                if (np.all(np.isclose(col_train, col_train.astype(int))) and np.all(np.isclose(col_test, col_test.astype(int)))):
+                    x_train_cb[col] = col_train.astype(int)
+                    x_test_cb[col] = col_test.astype(int)
+                    
+                    if x_train_cb[col].nunique() < 50:
+                        cat_features.append(col)
+        
+        cat_indices = [x_train_cb.columns.get_loc(c) for c in cat_features] if cat_features else None
+        
+        return x_train_cb, x_test_cb, cat_features, cat_indices
