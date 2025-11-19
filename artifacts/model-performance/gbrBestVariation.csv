@@ -1,0 +1,16 @@
+Metrics,Value
+Model,GBR (RandomizedSearchCV)
+CV MSE,0.2738
+CV MAE,0.4036
+CV RMSE,0.5232
+CV R2,0.7334
+CV MAPE,5.8564
+Test MSE,0.2683
+Test MAE,0.4001
+Test RMSE,0.518
+Test R2,0.7458
+Test MAPE,5.8926
+R2 Gap,-0.0124
+RMSE Ratio,0.9901
+Overfitting Status,Low
+Model Status (Generalization),Good
