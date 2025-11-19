@@ -11,3 +11,6 @@ LightGBM (RandomSearchCV),0.5235,0.7331,0.518,0.7458,-0.0127,0.9895,Low,Good
 CatBoost (Baseline),0.5375,0.7187,0.5178,0.7459,-0.0272,0.9633,Low,Good
 CatBoost (Optuna),0.6004,0.6489,0.5225,0.7413,-0.0924,0.8703,Mild,Good
 CatBoost (BayesianSearch),0.5222,0.7345,0.5172,0.7466,-0.0121,0.9904,Low,Good
+GBR (Baseline),0.5262,0.7304,0.5213,0.7425,-0.0121,0.9907,Low,Good
+GBR (Optuna),0.6077,0.6403,0.5966,0.6627,-0.0224,0.9817,Low,Fair
+GBR (RandomizedSearchCV),0.5232,0.7334,0.518,0.7458,-0.0124,0.9901,Low,Good
