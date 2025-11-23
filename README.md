@@ -144,6 +144,114 @@ graph LR
     J --> K
 ```
 
+**Model Evaluation Framework**
+Each model was evaluated using a comprehensive set of metrics:
+
+- Primary Metrics: (CV + Test) MSE, MAE, RMSE, R2 Score, MAPE
+- Robustness Assessment: 5-fold cross-validation scores (mean ± std)
+- Overfitting Analysis: Gap between CV R2 and Test R2
+- Threshold Optimization:  Multiplicative Scaling (MAPE Minimization)
+
+**Model Selection & Composite Scoring**
+A composite scoring system was developed to objectively select the best model:
+```bash
+Composite Score = 0.5 * Test R2 + 0.3 * CV R2 - 0.2 * R2 Gap
+```
+
+**Best Model by Compariosn**
+
+| **Comparison Category**                             | **Winner Model**                               |
+| --------------------------------------------------- | ---------------------------------------------- |
+| Test R² (↑ better)                                  | CatBoost                                       |
+| CV R² (↑ better)                                    | CatBoost                                       |
+| Test MAPE (%) (↓ better)                            | CatBoost, LightGBM, GBR                        |
+| CV RMSE (↓ better)                                  | CatBoost                                       |
+| Predicted vs Actual (High Value)                    | CatBoost *(tightest clustering near diagonal)* |
+| CV R² vs Test R² (Overfitting Indicator)            | RandomForest *(smallest gap)*                  |
+| Cross-Validation Robustness (Mean ± Std)            | CatBoost *(highest mean, lowest std)*          |
+| Overfitting Analysis (Generalization Indicator)     | LightGBM *(low overfitting, smallest R² gap)*  |
+| Test MAPE (Balanced Performance Metric)             | CatBoost, LightGBM, GBR *(all 5.89%)*          |
+| Composite Score Ranking (Final)                     | **CatBoost (0.596)**                           |
+
+This weighted approach prioritizes:
+
+- Robustness (Mean ± Std)
+- Balanced Performance (Test MAPE)
+- Generalization (penalizing overfitting and high variance)
+
+**Modeling Flowchart**
+
+```mermaid
+flowchart TD
+    %% ================ PREPROCESSING PHASE ================
+    A0["Raw Data:\nSuperMarketDataset.csv"] --> A1["Import Libraries"]
+    A1 --> A2["Dataflow & Sanity Check\n- Shape, dtypes, duplicates\n- Missing value %"]
+    A2 --> A3["Exploratory Data Analysis"]
+    A3 --> A3a["Univariate:\nCountplot, Histplot, Boxplot"]
+    A3 --> A3b["Bivariate:\nBoxplot, Scatterplot"]
+    A3 --> A3c["Multivariate:\nPairplot, Heatmap"]
+    A3a --> A4["Handling Missing Values"]
+    A3b --> A4
+    A3c --> A4
+    A4 --> A5["Categorical Encoding\n(Label/One-Hot)"]
+    A5 --> A6["Save Artifacts:\nx_train.pkl, y_train.pkl, cv.pkl"]
+
+    %% ================ MODELING PHASE ================
+    A6 --> B["Feature-Target Separation\nOutletSales = Target"]
+    B --> C["Feature Engineering"]
+    C --> C1["Compute PricePerWeight = MRP / ItemWeight"]
+    C --> C2["Create IsVisibile Flag (Visibility != 0)"]
+    C --> C3["Log-transform OutletSales → OutletSales_log"]
+    C --> C4["Log-transform Visibility (add 1 to handle 0s)"]
+    C --> C5["Group Rare ItemTypes (<300 samples) → 'Others'"]
+    C --> C6["Impute Missing OutletSize by OutletType Mode"]
+    C --> C7["Create IsGroceryStore Flag (OutletType == 'Grocery Store')"]
+    C --> C8["Rename: OutletSales_log → OutletSales"]
+    C1 --> D["Train-Test Split\n80-20 Random Split"]
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    C5 --> D
+    C6 --> D
+    C7 --> D
+    C8 --> D
+    D --> E["5-Fold KFold CV Setup"]
+
+    %% Model Evaluation Framework
+    E --> F["Model Evaluation Framework"]
+    F --> F1["Primary Metrics:\nTest R², CV R², Test MAPE, CV RMSE"]
+    F --> F2["Robustness Assessment:\nCV Scores (Mean ± Std)"]
+    F --> F3["Overfitting Analysis:\nR² Gap = CV R² − Test R²"]
+
+    %% Model Selection & Composite Scoring
+    F1 --> G["Model Selection & Composite Scoring"]
+    F2 --> G
+    F3 --> G
+    G --> G1["Composite Score = 0.5*Test R² + 0.3*CV R² − 0.2*R² Gap"]
+    G --> G2["Rank Models by Composite Score"]
+
+    %% Final Model Comparison
+    G1 --> H["Final Model Comparison"]
+    G2 --> H
+
+    H --> I["CatBoost (BayesianSearch)\nCOMPOSITE SCORE: 0.596\nSELECTED MODEL"]
+    H --> J["LightGBM (RandomSearchCV)\nComposite Score: 0.595"]
+    H --> K["GBR (RandomizedSearchCV)\nComposite Score: 0.595"]
+    H --> L["XGBoost (RandomSearchCV)\nComposite Score: 0.595"]
+    H --> M["RandomForest (HalvingRandomSearchCV)\nComposite Score: 0.592"]
+
+    %% Styling
+    classDef selected fill:#d4edda,stroke:#28a745,color:#155724;
+    classDef good fill:#fff3cd,stroke:#ffc107,color:#856404;
+    classDef fair fill:#f8d7da,stroke:#dc3545,color:#721c24;
+    classDef prep fill:#e9ecef,stroke:#6c757d,color:#212529;
+
+    class A0,A1,A2,A3,A3a,A3b,A3c,A4,A5,A6 prep
+    class I selected
+    class J,K,L good
+    class M fair
+```
+
 ---
 
 **Author**<br>
