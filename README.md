@@ -184,20 +184,20 @@ This weighted approach prioritizes:
 ```mermaid
 flowchart TD
     %% ================ PREPROCESSING PHASE ================
-    A0["Raw Data:\nSuperMarketDataset.csv"] --> A1["Import Libraries"]
-    A1 --> A2["Dataflow & Sanity Check\n- Shape, dtypes, duplicates\n- Missing value %"]
+    A0["Raw Data:<br>SuperMarketDataset.csv"] --> A1["Import Libraries"]
+    A1 --> A2["Dataflow & Sanity Check<br>- Shape, dtypes, duplicates<br>- Missing value %"]
     A2 --> A3["Exploratory Data Analysis"]
-    A3 --> A3a["Univariate:\nCountplot, Histplot, Boxplot"]
-    A3 --> A3b["Bivariate:\nBoxplot, Scatterplot"]
-    A3 --> A3c["Multivariate:\nPairplot, Heatmap"]
+    A3 --> A3a["Univariate:<br>Countplot, Histplot, Boxplot"]
+    A3 --> A3b["Bivariate:<br>Boxplot, Scatterplot"]
+    A3 --> A3c["Multivariate:<br>Pairplot, Heatmap"]
     A3a --> A4["Handling Missing Values"]
     A3b --> A4
     A3c --> A4
-    A4 --> A5["Categorical Encoding\n(Label/One-Hot)"]
-    A5 --> A6["Save Artifacts:\nx_train.pkl, y_train.pkl, cv.pkl"]
+    A4 --> A5["Categorical Encoding<br>(Label/One-Hot)"]
+    A5 --> A6["Save Artifacts:<br>x_train.pkl, y_train.pkl, cv.pkl"]
 
     %% ================ MODELING PHASE ================
-    A6 --> B["Feature-Target Separation\nOutletSales = Target"]
+    A6 --> B["Feature-Target Separation<br>OutletSales = Target"]
     B --> C["Feature Engineering"]
     C --> C1["Compute PricePerWeight = MRP / ItemWeight"]
     C --> C2["Create IsVisibile Flag (Visibility != 0)"]
@@ -207,7 +207,7 @@ flowchart TD
     C --> C6["Impute Missing OutletSize by OutletType Mode"]
     C --> C7["Create IsGroceryStore Flag (OutletType == 'Grocery Store')"]
     C --> C8["Rename: OutletSales_log → OutletSales"]
-    C1 --> D["Train-Test Split\n80-20 Random Split"]
+    C1 --> D["Train-Test Split<br>80-20 Random Split"]
     C2 --> D
     C3 --> D
     C4 --> D
@@ -219,9 +219,9 @@ flowchart TD
 
     %% Model Evaluation Framework
     E --> F["Model Evaluation Framework"]
-    F --> F1["Primary Metrics:\nTest R², CV R², Test MAPE, CV RMSE"]
-    F --> F2["Robustness Assessment:\nCV Scores (Mean ± Std)"]
-    F --> F3["Overfitting Analysis:\nR² Gap = CV R² − Test R²"]
+    F --> F1["Primary Metrics:<br>Test R², CV R², Test MAPE, CV RMSE"]
+    F --> F2["Robustness Assessment:<br>CV Scores (Mean ± Std)"]
+    F --> F3["Overfitting Analysis:<br>R² Gap = CV R² − Test R²"]
 
     %% Model Selection & Composite Scoring
     F1 --> G["Model Selection & Composite Scoring"]
@@ -234,11 +234,11 @@ flowchart TD
     G1 --> H["Final Model Comparison"]
     G2 --> H
 
-    H --> I["CatBoost (BayesianSearch)\nCOMPOSITE SCORE: 0.596\nSELECTED MODEL"]
-    H --> J["LightGBM (RandomSearchCV)\nComposite Score: 0.595"]
-    H --> K["GBR (RandomizedSearchCV)\nComposite Score: 0.595"]
-    H --> L["XGBoost (RandomSearchCV)\nComposite Score: 0.595"]
-    H --> M["RandomForest (HalvingRandomSearchCV)\nComposite Score: 0.592"]
+    H --> I["CatBoost (BayesianSearch)<br>COMPOSITE SCORE: 0.596<br>SELECTED MODEL"]
+    H --> J["LightGBM (RandomSearchCV)<br>Composite Score: 0.595"]
+    H --> K["GBR (RandomizedSearchCV)<br>Composite Score: 0.595"]
+    H --> L["XGBoost (RandomSearchCV)<br>Composite Score: 0.595"]
+    H --> M["RandomForest (HalvingRandomSearchCV)<br>Composite Score: 0.592"]
 
     %% Styling
     classDef selected fill:#d4edda,stroke:#28a745,color:#155724;
