@@ -234,11 +234,12 @@ flowchart TD
     G1 --> H["Final Model Comparison"]
     G2 --> H
 
-    H --> I["CatBoost (BayesianSearch)<br>COMPOSITE SCORE: 0.596<br>SELECTED MODEL"]
-    H --> J["LightGBM (RandomSearchCV)<br>Composite Score: 0.595"]
-    H --> K["GBR (RandomizedSearchCV)<br>Composite Score: 0.595"]
-    H --> L["XGBoost (RandomSearchCV)<br>Composite Score: 0.595"]
-    H --> M["RandomForest (HalvingRandomSearchCV)<br>Composite Score: 0.592"]
+    H --> I["CatBoost (BayesianSearch)<br>COMPOSITE SCORE: 0.596<br>Test R²: 0.741<br>CV R²: 0.735<br>R² Gap: -0.012<br>SELECTED MODEL"]
+    H --> J["LightGBM (RandomSearchCV)<br>Composite Score: 0.595<br>Test R²: 0.738<br>CV R²: 0.733<br>R² Gap: -0.013"]
+    H --> K["GBR (RandomizedSearchCV)<br>Composite Score: 0.595<br>Test R²: 0.734<br>CV R²: 0.733<br>R² Gap: -0.012"]
+    H --> L["XGBoost (RandomSearchCV)<br>Composite Score: 0.595<br>Test R²: 0.731<br>CV R²: 0.734<br>R² Gap: -0.011"]
+    H --> M["RandomForest (HalvingRandomSearchCV)<br>Composite Score: 0.592<br>Test R²: 0.728<br>CV R²: 0.731<br>R² Gap: -0.010"]
+
 
     %% Styling
     classDef selected fill:#d4edda,stroke:#28a745,color:#155724;
