@@ -123,11 +123,11 @@ The overall modeling workflow involved the following stages:
 
 ```mermaid
 graph LR
-    A[XGBoost: Baseline, Optuna, RandomSearch] --> A1[Pick best variant]
-    B[LightGBM: Baseline, Optuna, RandomSearch] --> B1[Pick best variant]
-    C[RandomForest: Baseline, Optuna, HalvingRandomSearch] --> C1[Pick best variant]
-    D[GradientBoosting: Baseline, Optuna, RandomSearch] --> D1[Pick best variant]
-    E[CatBoost: Baseline, Optuna, BayesianSearch] --> E1[Pick best variant]
+    A[XGBoost:<br>Baseline, Optuna, RandomSearch] --> A1[Pick best variant]
+    B[LightGBM:<br>Baseline, Optuna, RandomSearch] --> B1[Pick best variant]
+    C[RandomForest:<br>Baseline, Optuna, HalvingRandomSearch] --> C1[Pick best variant]
+    D[GradientBoosting:<br>Baseline, Optuna, RandomSearch] --> D1[Pick best variant]
+    E[CatBoost:<br>Baseline, Optuna, BayesianSearch] --> E1[Pick best variant]
     
     A1 --> F[Compare 5 best variants]
     B1 --> F
@@ -179,7 +179,7 @@ This weighted approach prioritizes:
 - Balanced Performance (Test MAPE)
 - Generalization (penalizing overfitting and high variance)
 
-**Modeling Flowchart**
+**Complete Modeling Process**
 
 ```mermaid
 flowchart TD
