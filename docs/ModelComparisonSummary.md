@@ -15,6 +15,6 @@ Best Model by Comparison
 | Composite Score Ranking (Final)                     | **CatBoost (0.596)**                           |
 
 
-**Final Recommendation: Select CatBoost**
+**Recommended Model: CatBoost (BayesianSearchCV)**
 
-Based on a comprehensive evaluation across accuracy, robustness, generalization, and business impact, CatBoost emerges as the optimal model for deployment in your Supermarket Sales Forecasting system.s
+Based on a comprehensive evaluation across accuracy, robustness, generalization, and business impact, CatBoost emerges as the optimal model for deployment in your Supermarket Sales Forecasting system.
