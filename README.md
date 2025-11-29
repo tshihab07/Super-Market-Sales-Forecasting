@@ -5,10 +5,12 @@
 - [Overview](#overview)
 - [Features](#features)
 - [Data Flow](#data-flow)
-    - [Dataset Description](#dataset-description)
-    - [Data Preprocessing](#data-preprocessing)
-    - [Libraries Description](#libraries-description)
+  - [Dataset Description](#dataset-description)
+  - [Data Preprocessing](#data-preprocessing)
+  - [Libraries Description](#libraries-description)
 - [Modeling Pipelne](#modeling-pipeline)
+  - [Overall Model Overview](#overall-model-overview)
+  - [Best Performing Model]()
 
 ---
 
@@ -252,6 +254,32 @@ flowchart TD
     class J,K,L good
     class M fair
 ```
+
+
+### Overall Model Overview
+
+**Aggregates evaluation results from all trained models:**
+
+- **CatBoost**
+    - Baseline Modeling
+    - Optuna Optimization
+    - BayesianSearch Optimization
+- **Random Forest**
+    - Baseline Modeling
+    - Optuna Optimization
+    - HalvingRandomSearchOptimization
+- **LightGBM**
+    - Baseline Modeling
+    - Optuna Optimization
+    - RandomizedSearch Optimization
+- **XGBoost**
+    - Baseline Modeling
+    - Optuna Optimization
+    - RandomizedSearch Optimization
+- **Gradient Boosting Regressor**
+    - Baseline Modeling
+    - Optuna Optimization
+    - RandomizedSearch Optimization
 
 ---
 
