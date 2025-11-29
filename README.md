@@ -281,6 +281,23 @@ flowchart TD
     - Optuna Optimization
     - RandomizedSearch Optimization
 
+Among all evaluated models, ***CatBoost (BayesianSearch)*** achieved the highest `Test R² (0.7466)` and lowest `Test MAPE (5.886%)`, demonstrating superior predictive accuracy and business-relevant precision for sales forecasting. It also shows excellent calibration, with minimal `overfitting (R² Gap = -0.012)` and robust cross-validation performance (`CV R² = 0.7345`, `CV RMSE = 0.5222`).
+
+**Close contenders include:**
+
+- ***LightGBM (RandomSearchCV)*** and ***GBR (RandomizedSearchCV)***, tied for second-best `Test R² (0.7458)` and `Test MAPE (5.890%)`, with even lower `overfitting gaps (−0.0127, −0.0124)` and slightly better CV stability.
+- ***XGBoost (RandomSearchCV)*** ranks fourth in `Test R² (0.7455)` but achieves the smallest `overfitting gap (−0.0113)` and highest `RMSE Ratio (0.992)`, indicating exceptional generalization and near-identical performance on train and test sets.
+- ***RandomForest (HalvingRandomSearchCV)*** shows the lowest `overfitting gap (−0.0100)` and the closest to perfect generalization, though its `Test R² (0.7410)` and `MAPE (5.944%)` are slightly lower.
+
+All top 5 models exhibit `Low` overfitting and `Good` generalization, confirming strong robustness across data splits.
+
+**In contrast:**
+
+- Optuna-tuned variants (***XGBoost - Optuna***, ***CatBoost - Optuna***) consistently underperform their RandomSearch/Bayesian counterparts, with lower Test R² and higher MAPE, suggesting over-regularization or premature pruning.
+- No model shows `High` or problematic overfitting, indicating effective hyperparameter tuning and validation strategy.
+
+Thus, **CatBoost (BayesianSearch)** is recommended as the final model, balancing peak accuracy, stability, and interpretability which is ideal for operational deployment in supermarket sales forecasting.
+
 ---
 
 **Author**<br>
