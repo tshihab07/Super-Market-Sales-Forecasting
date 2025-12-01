@@ -111,7 +111,7 @@ The overall modeling workflow involved the following stages:
   - Feature importance and SHAP analysis were later applied to interpret model behavior.
 
 
-**Model Development & Hyperparameter Optimization**
+Model Development
 
 | **Model**                       | **Optimization Techniques**                                         | **Key Hyperparameters Tuned**                                                                                                |
 | ------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -298,8 +298,47 @@ All top 5 models exhibit `Low` overfitting and `Good` generalization, confirming
 
 Thus, **CatBoost (BayesianSearch)** is recommended as the final model, balancing peak accuracy, stability, and interpretability which is ideal for operational deployment in supermarket sales forecasting.
 
+### Best Model Performance
+
+Based on a Test R² score, Test MAPE and overfitting gap, **CatBoost (BayesianSearchCV)** emerged as the superior model:
+
+- `CV MSE`: 0.2727
+- `CV MAE`: 0.4029
+- `CV RMSE`: 0.5222
+- `CV R2`: 0.7345
+- `CV MAPE`: 5.847
+- `Test MSE`: 0.2675
+- `Test MAE`: 0.4
+- `Test RMSE`: 0.5172
+- `Test R2`: 0.7466
+- `Test MAPE`: 5.8857
+- `R2 Gap`: -0.0121
+- `RMSE Ratio`: 0.9904
+- `Overfitting Status`: Low
+- `Model Status (Generalization)`: Good
+- `Composite Score`: 0.59607
+
 ---
 
-**Author**<br>
-Tushar Shihab<br>
-Machine Learning Engineer
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request.
+- Fork the project.
+- Create your feature branch
+- Commit changes
+- Push
+- Open a Pull Request
+
+---
+
+## Contact
+
+E-mail: tushar.shihab13@gmail.com <br>
+More Projects: 👉🏿 [Projects](https://github.com/tshihab07?tab=repositories)<br>
+LinkedIn: [Tushar Shihab](https://www.linkedin.com/in/tshihab07/)
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
