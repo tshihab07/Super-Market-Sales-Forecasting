@@ -9,6 +9,7 @@
   - [Data Preprocessing](#data-preprocessing)
   - [Libraries Description](#libraries-description)
 - [Modeling Pipelne](#modeling-pipeline)
+  - [Model Development](#model-development)
   - [Overall Model Overview](#overall-model-overview)
   - [Best Performing Model]()
 
@@ -111,7 +112,10 @@ The overall modeling workflow involved the following stages:
   - Feature importance and SHAP analysis were later applied to interpret model behavior.
 
 
-Model Development
+### Model Development
+
+**Hyperparameter Optimization**
+
 
 | **Model**                       | **Optimization Techniques**                                         | **Key Hyperparameters Tuned**                                                                                                |
 | ------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -121,7 +125,9 @@ Model Development
 | **Gradient Boosting Regressor** | 1. Grid Search CV <br> 2. Randomized Search CV                      | `n_estimators`, `learning_rate`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `subsample`                           |
 | **CatBoost Regressor**          | 1. Bayesian Optimization <br> 2. Optuna Optimization                | `iterations`, `depth`, `learning_rate`, `l2_leaf_reg`, `bagging_temperature`, `border_count`                                 |
 
-**Model Development Workflow**
+---
+
+**Modeling Flowchart**
 
 ```mermaid
 graph LR
@@ -180,6 +186,8 @@ This weighted approach prioritizes:
 - Robustness (Mean ± Std)
 - Balanced Performance (Test MAPE)
 - Generalization (penalizing overfitting and high variance)
+
+---
 
 **Complete Modeling Process**
 
@@ -255,6 +263,7 @@ flowchart TD
     class M fair
 ```
 
+---
 
 ### Overall Model Overview
 
