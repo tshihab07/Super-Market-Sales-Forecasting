@@ -11,8 +11,10 @@
 - [Modeling Pipelne](#modeling-pipeline)
   - [Model Development](#model-development)
   - [Overall Model Overview](#overall-model-overview)
-  - [Best Performing Model]()
-
+  - [Best Performing Model](#best-model-performance)
+- [Contribution](#contributing)
+- [Contact](#contact)
+- [License](#license)
 ---
 
 ## Overview
