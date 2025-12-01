@@ -72,11 +72,11 @@ Based on a Test R² score, Test MAPE and overfitting gap, **CatBoost (BayesianSe
 
 #### **Key Observations**
 
-Accuracy-Stability Trade-off: While `CatBoost` leads in raw accuracy, `XGBoost` and `LightGBM` offer marginally better stability — valuable for rolling forecasts across diverse outlet types.
-Categorical Advantage: `CatBoost`’s native handling of categorical features (e.g., `Item_Type`, `Outlet_Location`) likely contributed to its edge — reducing encoding bias.
-No Severe Overfitting: All top models show `R² Gap < 0.03`, confirming effective regularization and validation strategy.
-Optuna Caution: `Optuna`’s aggressive pruning may oversimplify complex sales patterns; Bayesian/Random search provided better exploration-exploitation balance.
-Interpretability: `SHAP` analysis confirms intuitive drivers: `MRP`, `ItemWeight`, and `Outlet_Type` dominate predictions aligning with domain expertise.
+- **Accuracy-Stability Trade-off:** While `CatBoost` leads in raw accuracy, `XGBoost` and `LightGBM` offer marginally better stability — valuable for rolling forecasts across diverse outlet types.
+- **Categorical Advantage:** `CatBoost`’s native handling of categorical features (e.g., `Item_Type`, `Outlet_Location`) likely contributed to its edge reducing encoding bias.
+- **No Severe Overfitting:** All top models show `R² Gap < 0.03`, confirming effective regularization and validation strategy.
+- **Optuna Caution:** `Optuna`’s aggressive pruning may oversimplify complex sales patterns; Bayesian/Random search provided better exploration-exploitation balance.
+- **Interpretability:** `SHAP` analysis confirms intuitive drivers: `MRP`, `ItemWeight`, and `Outlet_Type` dominate predictions aligning with domain expertise.
 
 ---
 
