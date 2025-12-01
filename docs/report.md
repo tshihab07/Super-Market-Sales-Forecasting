@@ -46,13 +46,11 @@ to predict `OutletSales` using historical supermarket transaction data. Each mod
 
 Therefore, **CatBoost (BayesianSearch)** is selected as the final, production-ready model for intelligent sales forecasting.
 
-
-
 ---
 
 #### **Best Performing Model Performance Summary**
 
-Based on a composite scoring system that weighted Cross-Validation Mean, Test Accuracy, Test F1-Score, Test AUC-ROC, while penalizing overfitting gaps and CV standard deviation, **XGBoost (Optuna)** emerged as the superior model:
+Based on a Test R² score, Test MAPE and overfitting gap, **CatBoost (BayesianSearchCV)** emerged as the superior model:
 
 - `CV MSE`: 0.2727
 - `CV MAE`: 0.4029
