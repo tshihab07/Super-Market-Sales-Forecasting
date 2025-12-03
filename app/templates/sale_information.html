@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Enter Sale Information{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>🏪 Enter Sale Information</h2>
+    <form action="/predict" method="post">
+        <!-- Item Type -->
+        <div class="form-group">
+            <label for="ItemType">Item Type</label>
+            <select name="ItemType" id="ItemType" required>
+                <option value="Fruits and Vegetables">Fruits and Vegetables</option>
+                <option value="Snack Foods">Snack Foods</option>
+                <option value="Household">Household</option>
+                <option value="Frozen Foods">Frozen Foods</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Canned">Canned</option>
+                <option value="Baking Goods">Baking Goods</option>
+                <option value="Health and Hygiene">Health and Hygiene</option>
+                <option value="Soft Drinks">Soft Drinks</option>
+                <option value="Meat">Meat</option>
+                <option value="Others">Others</option>
+            </select>
+        </div>
+
+        <!-- Fat Content -->
+        <div class="form-group">
+            <label>Fat Content</label>
+            <div class="radio-group">
+                <label><input type="radio" name="FatContent" value="Low Fat" checked> Low Fat</label>
+                <label><input type="radio" name="FatContent" value="Regular"> Regular</label>
+            </div>
+        </div>
+
+        <!-- Item Weight -->
+        <div class="form-group">
+            <label for="ItemWeight">Item Weight (kg)</label>
+            <input type="number" name="ItemWeight" id="ItemWeight" step="0.01" min="0.1" value="10.0" required>
+        </div>
+
+        <!-- MRP -->
+        <div class="form-group">
+            <label for="MRP">Item Price (MRP)</label>
+            <input type="number" name="MRP" id="MRP" step="0.01" min="1" value="100.0" required>
+        </div>
+
+        <!-- Visibility -->
+        <div class="form-group">
+            <label>Is Item Visible on Shelf?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="IsVisible" value="yes" checked> Yes</label>
+                <label><input type="radio" name="IsVisible" value="no"> No</label>
+            </div>
+        </div>
+
+        <!-- Outlet Size -->
+        <div class="form-group">
+            <label>Outlet Size</label>
+            <div class="radio-group">
+                <label><input type="radio" name="OutletSize" value="Large"> Large</label>
+                <label><input type="radio" name="OutletSize" value="Medium" checked> Medium</label>
+                <label><input type="radio" name="OutletSize" value="Small"> Small</label>
+            </div>
+        </div>
+
+        <!-- Location Type -->
+        <div class="form-group">
+            <label>Location Type</label>
+            <div class="radio-group">
+                <label><input type="radio" name="LocationType" value="City"> City</label>
+                <label><input type="radio" name="LocationType" value="Semi-Urban" checked> Semi-Urban</label>
+                <label><input type="radio" name="LocationType" value="Rural"> Rural</label>
+            </div>
+        </div>
+
+        <!-- Outlet Type -->
+        <div class="form-group">
+            <label for="OutletType">Outlet Type</label>
+            <select name="OutletType" id="OutletType" required>
+                <option value="Small-Format Supermarket">Small-Format Supermarket</option>
+                <option value="Medium-Format Supermarket" selected>Medium-Format Supermarket</option>
+                <option value="Large-Format Supermarket">Large-Format Supermarket</option>
+            </select>
+        </div>
+
+        <!-- Outlet Age -->
+        <div class="form-group">
+            <label for="OutletAge">Outlet Age (years)</label>
+            <input type="number" name="OutletAge" id="OutletAge" min="0" max="100" value="10" required>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-primary">🔍 Predict Sales</button>
+    </form>
+</div>
+{% endblock %}
