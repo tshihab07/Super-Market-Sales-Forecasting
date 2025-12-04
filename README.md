@@ -12,6 +12,7 @@
   - [Model Development](#model-development)
   - [Overall Model Overview](#overall-model-overview)
   - [Best Performing Model](#best-model-performance)
+- [Technical Architecture](#techinical-architecture)
 - [Contribution](#contributing)
 - [Contact](#contact)
 - [License](#license)
@@ -328,6 +329,11 @@ Based on a Test R² score, Test MAPE and overfitting gap, **CatBoost (BayesianSe
 - `Overfitting Status`: Low
 - `Model Status (Generalization)`: Good
 - `Composite Score`: 0.59607
+
+---
+
+## Technical Architecture
+
 
 ---
 
