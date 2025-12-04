@@ -17,6 +17,7 @@ async def home(request: Request):
 async def sale_information(request: Request):
     return templates.TemplateResponse("sale_information.html", {"request": request})
 
+
 @router.post("/predict", response_class=HTMLResponse)
 async def predict(
     request: Request,
@@ -48,7 +49,7 @@ async def predict(
         validated_input = SaleInput(**input_dict)
 
         # Preprocess
-        preprocessed = preprocess_input(validated_input.dict())
+        preprocessed = preprocess_input(validated_input)
 
         # Predict
         log_pred, orig_pred = predict_sales(preprocessed)
