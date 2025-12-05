@@ -1,19 +1,18 @@
 from pathlib import Path
 
+# Auto-detect project root
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+
 class Settings:
-    # Paths
-    ARTIFACTS_DIR = Path("../artifacts")
-    MODELS_DIR = Path("../models")
-    DATA_DIR = Path("../data")
+    ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
+    MODELS_DIR = PROJECT_ROOT / "artifacts" / "models"
+    DATA_DIR = PROJECT_ROOT / "data"
 
-    # Encoders
-    TARGET_ENCODER_PATH = ARTIFACTS_DIR / "target_encoder.pkl"
-    OHE_ENCODER_PATH = ARTIFACTS_DIR / "ohe.pkl"
-
-    # Model
+    # Now paths are absolute and robust
+    TARGET_ENCODER_PATH = ARTIFACTS_DIR / "feature-selection" / "target_encoder.pkl"
+    OHE_ENCODER_PATH = ARTIFACTS_DIR / "feature-selection" / "ohe.pkl"
     BEST_MODEL_PATH = MODELS_DIR / "model_Catboost.pkl"
 
-    # Expected feature order (from training)
     FEATURE_ORDER = [
         'ItemWeight', 'MRP', 'OutletAge', 'Visibility', 'IsVisibile', 'IsGroceryStore', 'PricePerWeight',
         'ItemType',
@@ -22,5 +21,14 @@ class Settings:
         'LocationType_Tier 2', 'LocationType_Tier 3',
         'OutletType_Supermarket Type1', 'OutletType_Supermarket Type2', 'OutletType_Supermarket Type3'
     ]
+
+    # Debug helper
+    def __init__(self):
+        print(f"Project root: {PROJECT_ROOT}")
+        print(f"Target encoder path: {self.TARGET_ENCODER_PATH}")
+        print(f"Exists? {self.TARGET_ENCODER_PATH.exists()}")
+        if not self.TARGET_ENCODER_PATH.exists():
+            print("WARNING: Encoder file not found!")
+
 
 settings = Settings()
