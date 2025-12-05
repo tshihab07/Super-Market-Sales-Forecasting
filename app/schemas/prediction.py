@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 from typing import Literal
 
 class SaleInput(BaseModel):
@@ -12,39 +12,13 @@ class SaleInput(BaseModel):
     IsVisible: bool
     OutletSize: Literal["Large", "Medium", "Small"]
     LocationType: Literal["City", "Semi-Urban", "Rural"]
-    OutletType: Literal["Small-Format Supermarket", "Medium-Format Supermarket", "Large-Format Supermarket"]
+    OutletType: Literal[
+        "Small-Format Supermarket",
+        "Medium-Format Supermarket",
+        "Large-Format Supermarket"
+    ]
     OutletAge: int = Field(ge=0, le=100, description="Outlet age in years")
 
-    @validator("OutletSize", pre=True)
-    def map_outlet_size(cls, v):
-        mapping = {"Large": "High", "Medium": "Medium", "Small": "Small"}
-        if v in mapping:
-            return mapping[v]
-        return v
-
-    @validator("LocationType", pre=True)
-    def map_location_type(cls, v):
-        mapping = {"City": "Tier 1", "Semi-Urban": "Tier 2", "Rural": "Tier 3"}
-        if v in mapping:
-            return mapping[v]
-        return v
-
-    @validator("OutletType", pre=True)
-    def map_outlet_type(cls, v):
-        mapping = {
-            "Small-Format Supermarket": "Supermarket Type1",
-            "Medium-Format Supermarket": "Supermarket Type2",
-            "Large-Format Supermarket": "Supermarket Type3"
-        }
-        if v in mapping:
-            return mapping[v]
-        return v
-
-    @validator("IsVisible", pre=True)
-    def parse_is_visible(cls, v):
-        if isinstance(v, str):
-            return v.lower() in ["yes", "true", "1"]
-        return bool(v)
 
 class PredictionResult(BaseModel):
     log_sales: float
