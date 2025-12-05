@@ -7,17 +7,17 @@ app = FastAPI(
     title="Supermarket Sales Forecasting API",
     description="AI-powered sales prediction for supermarket outlets using CatBoost",
     version="1.0.0",
-    docs_url="/docs",  # Swagger UI
-    redoc_url="/redoc" # ReDoc
+    docs_url="/docs",
+    redoc_url="/redoc"
 )
 
-# Mount static files (CSS)
+# mount static files (CSS)
 app.mount("/static", StaticFiles(directory=Path(__file__).parent / "static"), name="static")
 
-# Include API routes
+# include API routes
 app.include_router(api_router)
 
-# Optional: health check
+# health check
 @app.get("/health")
 async def health_check():
     return {"status": "OK", "model": "CatBoost (BayesianSearch)"}
