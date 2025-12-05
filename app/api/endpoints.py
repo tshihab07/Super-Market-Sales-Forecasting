@@ -13,6 +13,7 @@ templates = Jinja2Templates(directory=Path(__file__).parent.parent / "templates"
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+
 @router.get("/sale_information", response_class=HTMLResponse)
 async def sale_information(request: Request):
     return templates.TemplateResponse("sale_information.html", {"request": request})
@@ -25,7 +26,7 @@ async def predict(
     FatContent: str = Form(...),
     ItemWeight: float = Form(...),
     MRP: float = Form(...),
-    IsVisible: str = Form(...),  # "yes" or "no"
+    IsVisible: str = Form(...),
     OutletSize: str = Form(...),
     LocationType: str = Form(...),
     OutletType: str = Form(...),
