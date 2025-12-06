@@ -4,7 +4,7 @@
 
 - [Overview](#overview)
 - [Features](#features)
-- [Data Flow](#data-flow)
+- [Dataset](#dataset)
   - [Dataset Description](#dataset-description)
   - [Data Preprocessing](#data-preprocessing)
   - [Libraries Description](#libraries-description)
@@ -12,7 +12,7 @@
   - [Model Development](#model-development)
   - [Overall Model Overview](#overall-model-overview)
   - [Best Performing Model](#best-model-performance)
-- [Technical Architecture](#techinical-architecture)
+- [System Architecture](#system-architecture)
 - [Contribution](#contributing)
 - [Contact](#contact)
 - [License](#license)
@@ -24,7 +24,7 @@ Super Market Sales Forecasting is a data-driven project designed to predict futu
 
 ---
 
-## Data Flow
+## Dataset
 
 ### Dataset Description
 This dataset captures comprehensive retail sales data from multiple outlets, combining both product-level and outlet-level characteristics to understand sales patterns and performance.<br>
@@ -332,7 +332,82 @@ Based on a Test R² score, Test MAPE and overfitting gap, **CatBoost (BayesianSe
 
 ---
 
-## Technical Architecture
+## System Architecture
+
+The Supermarket Sales Forecasting system follows a modular, layered architecture designed for maintainability, scalability, and reproducibility. It separates concerns into distinct layers: Data, Model, API, and Frontend, with strict unidirectional data flow.
+
+**Key Design Principles:**
+- Separation of Concerns: Preprocessing, modeling, and serving logic are decoupled.
+- Reproducibility: All preprocessing artifacts (encoders) and models are persisted.
+- Type Safety: Pydantic ensures input validation; `FastAPI` provides auto-generated OpenAPI docs.
+- Production-Ready: Supports hot-reloading, error handling, and future extension (e.g., SHAP explanations, monitoring).
+
+**Architecture Diagram**
+
+```mermaid
+flowchart TD
+    subgraph Frontend ["User Interface (HTML/CSS)"]
+        A[Home Page] -->|Click| B[Sales Input Form]
+        B -->|POST /predict| C[Prediction Result]
+        C -->|Click| B
+    end
+
+    subgraph API ["FastAPI Backend"]
+        D[Router: /, /sale_information, /predict] --> E[Pydantic Validation]
+        E -->|SaleInput| F[Preprocessing Service]
+        F -->|Encoded DataFrame| G[Prediction Service]
+        G -->|log_sales, sales| H[Response Template]
+    end
+
+    subgraph Services ["Core Services"]
+        F -->|Loads| I[TargetEncoder + OHE]
+        G -->|Loads| J[CatBoost Model]
+        I -->|From| K["artifacts/feature-selection/*.pkl"]
+        J -->|From| L["models/model_Catboost.pkl"]
+    end
+
+    subgraph Data ["Data & Artifacts"]
+        K --> M["clean_dataset.csv"]
+        L --> N["encoded_dataset.csv"]
+    end
+
+    classDef frontend fill:#4A90E2,stroke:#333,color:white;
+    classDef api fill:#50C878,stroke:#333,color:white;
+    classDef service fill:#FFA500,stroke:#333,color:white;
+    classDef data fill:#9370DB,stroke:#333,color:white;
+
+    class A,B,C frontend;
+    class D,E,F,G,H api;
+    class I,J,K,L,M,N service;
+    class K,L,M,N data;
+```
+
+### Data Flow
+
+1. User Interaction
+  - User visits / → sees homepage.
+  - Clicks “See Forecasting” → redirected to /sale_information.
+  - Fills form with user-friendly inputs (e.g., "City", "Small-Format Supermarket").
+2. Request Handling (/predict)
+  - Form data sent via POST /predict.
+  - FastAPI validates inputs using SaleInput Pydantic model.
+  - Valid data passed to preprocessing.py.
+3. Preprocessing Layer
+  - Maps user inputs → internal representations:
+    - "City" → "Tier 1"
+    - "Small-Format Supermarket" → "Supermarket Type1"
+  - Computes derived features (PricePerWeight, IsGroceryStore).
+  - Applies saved encoders:
+    - TargetEncoder → ItemType (numeric)
+    - OneHotEncoder → categorical dummies
+  - Ensures exact feature order and int-typed OHE columns (for CatBoost).
+4. Prediction Layer
+Preprocessed DataFrame fed to CatBoostRegressor.
+Log-scale prediction → exponentiated to original sales scale.
+Result formatted and returned via Jinja2 template.
+5. Response
+Rendered HTML page shows predicted sales + “Predict Again” button.
+
 
 
 ---
