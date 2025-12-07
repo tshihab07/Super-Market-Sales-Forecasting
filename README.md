@@ -356,6 +356,60 @@ SupermarketSalePrediction/
 └── README.md
 ```
 
+---
+
+## Dependencies
+
+```bash
+# Core Data Science Libraries
+pandas>=1.5.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Machine Learning (Scikit-learn & Extensions)
+scikit-learn>=1.3.0
+scikit-optimize>=0.9.0
+category_encoders>=2.8.1
+
+# Gradient Boosting Models
+xgboost>=1.7.0
+catboost>=1.2.8
+
+# Model Persistence
+joblib>=1.3.0
+
+# Model Interpretability
+shap>=0.41.0
+
+yellowbrick>=1.5.0
+
+# fastAPI development libraries
+fastapi>=0.100.0
+uvicorn[standard]>=0.22.0
+jinja2>=3.1.2
+python-multipart>=0.0.6
+```
+
+---
+
+## Installation
+
+### Clone the repository
+```bash
+git clone https://github.com/tshihab07/Super-Market-Sales-Forecasting.git
+```
+
+```bash
+cd Super-Market-Sales-Forecasting
+```
+
+### Create virtual environment
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# .venv\Scripts\activate   # Windows
+```
 
 ## System Architecture
 
