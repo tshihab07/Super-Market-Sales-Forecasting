@@ -501,7 +501,18 @@ Result formatted and returned via Jinja2 template.
 5. Response
 Rendered HTML page shows predicted sales + “Predict Again” button.
 
+---
 
+## Deployment
+
+---
+
+## Future Enhancement
+
+- Time-series extension (prophet, LSTM) for weekly/monthly forecasts
+- Uncertainty quantification (prediction intervals)
+- Drift detection & automated retraining pipeline
+- Dashboard integration (Plotly/Dash)
 
 ---
 
