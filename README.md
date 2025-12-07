@@ -522,6 +522,10 @@ Rendered HTML page shows predicted sales + “Predict Again” button.
 
 ## Deployment
 
+This forecasting system is deployed on render.com, allowing users to easily input sales details and receive instant prediction through a live web interface. This deployment ensures smooth accessibility, real-time inference, and a production-ready environment for showcasing the model’s performance.
+
+**Live Demo:** [Supermarket Sales Forecasting](https://supermarket-sales-forecasting.onrender.com/)
+
 ---
 
 ## Future Enhancement
