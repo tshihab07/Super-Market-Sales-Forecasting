@@ -503,6 +503,14 @@ Rendered HTML page shows predicted sales + “Predict Again” button.
 
 ---
 
+## Model Interpretability
+
+- Used **SHAP** to explain predictions and validate domain logic.
+- Top drivers: `MRP`, `ItemWeight`, `OutletType` — aligns with retail expertise.
+- [View SHAP Summary Plot](./visualizations/shap_summary.png)
+
+---
+
 ## Deployment
 
 ---
