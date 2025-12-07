@@ -1,5 +1,9 @@
 # Super Market Sales Forecasting
 
+> **Predicting Retail Sales with Advanced Machine Learning Models**
+
+![Landing Page of the Supermarket Sale Forecasting](images/landingPage.png)
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -18,7 +22,7 @@
 - [System Architecture](#system-architecture)
   - [Flowchart](#flowchart)
   - [Data Flow](#data-flow)
--[Model Interpretability](#model-interpretability)
+- [Model Interpretability](#model-interpretability)
 - [Deployment](#deployment)
 - [Future Enhancement](#future-enhancement)
 - [Contribution](#contributing)
