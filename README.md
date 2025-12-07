@@ -12,10 +12,18 @@
   - [Model Development](#model-development)
   - [Overall Model Overview](#overall-model-overview)
   - [Best Performing Model](#best-model-performance)
+- [File Structure](#file-structure)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
 - [System Architecture](#system-architecture)
+  - [Flowchart](#flowchart)
+  - [Data Flow](#data-flow)
+- [Deployment](#deployment)
+- [Future Enhancement](#future-enhancement)
 - [Contribution](#contributing)
 - [Contact](#contact)
 - [License](#license)
+
 ---
 
 ## Overview
@@ -337,12 +345,12 @@ Based on a Test R² score, Test MAPE and overfitting gap, **CatBoost (BayesianSe
 The Supermarket Sales Forecasting system follows a modular, layered architecture designed for maintainability, scalability, and reproducibility. It separates concerns into distinct layers: Data, Model, API, and Frontend, with strict unidirectional data flow.
 
 **Key Design Principles:**
-- Separation of Concerns: Preprocessing, modeling, and serving logic are decoupled.
-- Reproducibility: All preprocessing artifacts (encoders) and models are persisted.
-- Type Safety: Pydantic ensures input validation; `FastAPI` provides auto-generated OpenAPI docs.
-- Production-Ready: Supports hot-reloading, error handling, and future extension (e.g., SHAP explanations, monitoring).
+- **Separation of Concerns:** Preprocessing, modeling, and serving logic are decoupled.
+- **Reproducibility:** All preprocessing artifacts (encoders) and models are persisted.
+- **Type Safety:** Pydantic ensures input validation; `FastAPI` provides auto-generated OpenAPI docs.
+- **Production-Ready:** Supports hot-reloading, error handling, and future extension (e.g., SHAP explanations, monitoring).
 
-**Architecture Diagram**
+### Flowchart
 
 ```mermaid
 flowchart TD
