@@ -340,6 +340,23 @@ Based on a Test R² score, Test MAPE and overfitting gap, **CatBoost (BayesianSe
 
 ---
 
+## File Structure
+
+```bash
+SupermarketSalePrediction/
+├── app/                    # FastAPI web application
+├── artifacts/              # Encoders, CV splits, performance logs
+├── data/                   # Cleaned & encoded datasets
+├── models/                 # Trained model binaries (.pkl)
+├── notebooks/              # EDA, modeling, optimization
+├── visualizations/         # Plots, SHAP, diagnostics
+├── utilities.py            # Reusable ML utilities
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
+
 ## System Architecture
 
 The Supermarket Sales Forecasting system follows a modular, layered architecture designed for maintainability, scalability, and reproducibility. It separates concerns into distinct layers: Data, Model, API, and Frontend, with strict unidirectional data flow.
