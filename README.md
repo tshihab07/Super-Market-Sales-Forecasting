@@ -411,6 +411,18 @@ source .venv/bin/activate  # Linux/Mac
 # .venv\Scripts\activate   # Windows
 ```
 
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Run the application
+```bash
+uvicorn app.main:app --reload --port 8000
+```
+
+Visit `http://localhost:8000` in your browser.
+
 ## System Architecture
 
 The Supermarket Sales Forecasting system follows a modular, layered architecture designed for maintainability, scalability, and reproducibility. It separates concerns into distinct layers: Data, Model, API, and Frontend, with strict unidirectional data flow.
