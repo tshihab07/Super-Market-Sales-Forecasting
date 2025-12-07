@@ -18,6 +18,7 @@
 - [System Architecture](#system-architecture)
   - [Flowchart](#flowchart)
   - [Data Flow](#data-flow)
+-[Model Interpretability](#model-interpretability)
 - [Deployment](#deployment)
 - [Future Enhancement](#future-enhancement)
 - [Contribution](#contributing)
