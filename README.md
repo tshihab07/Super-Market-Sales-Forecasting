@@ -2,9 +2,11 @@
 
 > **Predicting Retail Sales with Advanced Machine Learning Models**
 
-![Landing Page of the Supermarket Sale Forecasting](images/landingPage.png)
+![Landing Page of the Supermarket Sale Forecasting](images/landingPage.PNG)
+
 
 [![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)]() [![numpy](https://img.shields.io/badge/numpy-013243?logo=numpy&logoColor=white)]() [![matplotlib](https://img.shields.io/badge/matplotlib-e67e22?logo=matplotlib&logoColor=white)]() [![seaborn](https://img.shields.io/badge/seaborn-3A7CA5?logo=seaborn&logoColor=white)]() [![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white)]() [![scikit-optimize](https://img.shields.io/badge/scikit--optimize-6A4B9E?logo=scikit-learn&logoColor=white)]() [![category-encoders](https://img.shields.io/badge/category--encoders-4A90E2)]() [![XGBoost](https://img.shields.io/badge/XGBoost-0066CC?logo=apache&logoColor=white)]() [![CatBoost](https://img.shields.io/badge/CatBoost-FF6F00?logo=catboost&logoColor=white)]() [![joblib](https://img.shields.io/badge/joblib-333333?logo=joblib&logoColor=white)]() [![SHAP](https://img.shields.io/badge/SHAP-6A4B9E?logo=python&logoColor=white)]() [![Yellowbrick](https://img.shields.io/badge/Yellowbrick-1F77B4?logo=python&logoColor=white)]() [![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)]() [![Uvicorn](https://img.shields.io/badge/Uvicorn-5B2A86?logo=fastapi&logoColor=white)]() [![Jinja2](https://img.shields.io/badge/Jinja2-Black?logo=jinja&logoColor=white)]() [![python-multipart](https://img.shields.io/badge/python--multipart-3776AB?logo=python&logoColor=white)]()
+
 
 ## 📋 Table of Contents
 
