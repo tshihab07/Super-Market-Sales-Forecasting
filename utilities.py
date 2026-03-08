@@ -1,7 +1,3 @@
-# utilities.py
-# Reusable utilities for SuperMarket Sales Forecasting ML Models
-# Designed for consistency, reproducibility, and extensibility
-
 import numpy as np
 import pandas as pd
 from pathlib import Path
@@ -12,10 +8,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-# ------------------------------------------------------------------
-# CLASS: Evaluator
-# Unified metric calculation, train/test/CV comparison, and overfitting diagnosis
-# ------------------------------------------------------------------
+# unified metric calculation, train/test/CV comparison, and overfitting diagnosis
 class Evaluator:
     
     @staticmethod
@@ -81,7 +74,7 @@ class Evaluator:
         if scoring is None:
             scoring = ['neg_mean_squared_error', 'neg_mean_absolute_error', 'r2']
         
-        # Standard metrics via cross_validate
+        # standard metrics via cross_validate
         cv_results = cross_validate(
             model, X, y, cv=cv, scoring=scoring, n_jobs=-1, return_train_score=False
         )
@@ -95,13 +88,12 @@ class Evaluator:
         mape_scores = []
         for train_idx, val_idx in cv.split(X, y):
             model_clone = model
-            # For safety, fit clone
             try:
                 model_clone.fit(X.iloc[train_idx], y.iloc[train_idx])
                 y_pred = model_clone.predict(X.iloc[val_idx])
             
             except Exception:
-                # Fallback: use original model fit if stateful
+                # fallback: use original model fit if stateful
                 y_pred = model.predict(X.iloc[val_idx])
            
             mape_scores.append(Evaluator.safe_mape(y.iloc[val_idx], y_pred))
@@ -123,7 +115,7 @@ class Evaluator:
         r2_gap = cv_r2 - test_r2
         rmse_ratio = test_rmse / cv_rmse if cv_rmse > 0 else np.inf
         
-        # Overfitting logic
+        # overfitting logic
         if r2_gap > tolerance or rmse_ratio > 1.05:
             overfit_status = "High"
         
@@ -133,7 +125,7 @@ class Evaluator:
         else:
             overfit_status = "Mild"
         
-        # Generalization status
+        # generalization status
         if test_r2 > 0.85:
             gen_status = "Excellent"
         
@@ -149,11 +141,7 @@ class Evaluator:
         return r2_gap, rmse_ratio, overfit_status, gen_status
 
 
-# ------------------------------------------------------------------
-# CLASS: ModelPersister
-# Handles saving models, performance summaries, and aggregated comparisons
-# ------------------------------------------------------------------
-# Handles saving trained models and performance results to organized directories
+# Handles saving models, performance summaries, and aggregated performance results to organized directories
 class ModelPersister:
     
     def __init__(self, model_name, artifacts_root="../artifacts"):
@@ -167,13 +155,13 @@ class ModelPersister:
         self.performance_dir.mkdir(parents=True, exist_ok=True)
     
 
-    # Save the trained model in appropriate format
+    # save the trained model in appropriate format
     def save_model(self, model):
         joblib.dump(model, self.model_dir / f"model_{self.model_name.title()}.pkl")
         
         print(f"Model saved: {self.model_dir}/{self.model_name.lower()}.pkl")
 
-    # Save full train/test/CV metrics for this model only
+    # save full train/test/CV metrics
     def save_performance(self, performance_df, tag=""):
         if tag:
             filename = f"{self.model_name.lower()}{tag}.csv"
@@ -185,11 +173,11 @@ class ModelPersister:
         print(f"{self.model_name} performance saved: {path}")
     
 
-    # Append this model's summary metrics to the shared performance file
+    # append model's summary metrics to the shared performance file
     def aggregated_performance(self, df):
         path = self.performance_dir / "a_ModelPerformance.csv"
         
-        # Append or create
+        # append or create
         if path.exists():
             model_perf = pd.read_csv(path)                          # open previous loaded data
             df = pd.concat([model_perf, df], ignore_index=True)     # append new data
@@ -201,7 +189,7 @@ class ModelPersister:
         print(f"Appended to aggregated performance: {path}")
     
 
-    # Append this model's overfitting metrics to the shared overfitting file
+    # append model's overfitting metrics to the shared overfitting file
     def append_overfitting(self, df):
         path = self.performance_dir / "a_overfittingAnalysis.csv"
         
@@ -216,10 +204,7 @@ class ModelPersister:
         print(f"Appended to overfitting analysis: {path}")
 
 
-# ------------------------------------------------------------------
-# CLASS: DataHandler
-# For loading/splitting — mirrors your structured workflow
-# ------------------------------------------------------------------
+# loading/splitting workflow
 class DataHandler:
     
     @staticmethod
